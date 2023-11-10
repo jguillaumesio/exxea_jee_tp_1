@@ -1,0 +1,8 @@
+com\example\demo\model\Book.class
+com\example\demo\controller\BookServlet.class
+com\example\demo\repository\Repository.class
+com\example\demo\utils\DBConnection.class
+com\example\demo\model\Model.class
+com\example\demo\repository\BookRepository.class
+com\example\demo\utils\Misc.class
+com\example\demo\repository\AbstractRepository.class

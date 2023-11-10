@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  tomcat-deploy:
+    image: tomcat:10.1.13-jre11-temurin-jammy
+    container_name: tomcat-container
+    volumes:
+      - ./server/app/target/demo-1.0-SNAPSHOT:/usr/local/tomcat/webapps/demo_war
+    ports:
+      - "8080:8080"
+    networks:
+      my_network:
+        ipv4_address: 172.31.1.1
+  mysql-server:
+    build:
+      dockerfile: ./db/Dockerfile
+    container_name: mysql-container
+    environment:
+        MYSQL_ROOT_PASSWORD: "exxea"
+        MYSQL_DATABASE: "api"
+        MYSQL_USER: "exxea"
+        MYSQL_PASSWORD: "exxea"
+    ports:
+      - "3306:3306"
+    networks:
+      my_network:
+        ipv4_address: 172.31.1.2
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+volumes:
+  maven-cache:
+networks:
+  my_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.0.0/16
